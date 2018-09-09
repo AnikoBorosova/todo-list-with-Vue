@@ -1,0 +1,40 @@
+<span v-bind:title="message">
+<span v-if="seen">Now you see me</span>
+<li v-for="todo in todos">
+<button v-on:click="reverseMessage">Reverse Message</button>
+<input v-model="message">
+<span v-once>This will never change: {{ msg }}</span>
+<p>Using v-html directive: <span v-html="rawHtml"></span></p>
+
+
+Mustaches cannot be used inside HTML attributes. Instead, use a v-bind directive:
+<div v-bind:id="dynamicId"></div>
+<button v-bind:disabled="isButtonDisabled">Button</button>
+
+
+<a v-bind:href="url"> ... </a>
+
+
+<form v-on:submit.prevent="onSubmit"> ... </form>
+
+
+Class and style binding
+<div v-bind:class="{ active: isActive }"></div>
+
+
+
+Conditional rendering
+<h1 v-if="ok">Yes</h1>
+<h1 v-else>No</h1>
+<div v-else-if="type === 'B'">
+
+<template v-if="ok">
+  <h1>Title</h1>
+  <p>Paragraph 1</p>
+  <p>Paragraph 2</p>
+</template>
+
+
+
+The difference is that an element with v-show will always be rendered and remain in the DOM; v-show only toggles the display CSS property of the element.
+<h1 v-show="ok">Hello!</h1>
