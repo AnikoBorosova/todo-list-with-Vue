@@ -3,27 +3,55 @@
 <head>
 	<title></title>
 	<style>
+		#app {
+			margin: 3rem;
+		}
+		.v-form > .v-text-field {
+			display: inline-flex;
+			width: 200px;
+		}
+		li {
+			list-style-type: none;
+		}
 		.crossed {
 			text-decoration: line-through;
 		}
+		li > .v-input {
+			display: inline-flex;
+		}
+		.subheading {
+			display: inline-flex;
+			width: 200px;
+		}
 	</style>
+	<style lang="stylus">
+	  $color-pack = true
+
+	  @import '~vuetify/src/stylus/main'
+	</style>
+	<link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 </head>
 <body>
 	<div id="app">
-		<input v-model="userInput" placeholder="add to-do task">
-		<button v-on:click="addTask()">Add new task</button>
+		<v-form @submit="addTask()">
+			<v-text-field v-model="userInput" placeholder="add to-do task"></v-text-field>
+			<!-- <input v-model="userInput" placeholder="add to-do task"> -->
+			<v-btn v-on:click="addTask()" normal color="#26A69A">Add new task</v-btn>
+		</v-form>
 
 		<ul>
-			<li v-for="todo in todos" v-if="visible">
-				<input type="checkbox" v-model="checked">
-			    <span v-bind:class="{ crossed: checked }">{{ todo }}</span>
-			    <button v-on:click="deleteTask()">Delete</button>
+			<li v-for="(todo, index) in todos">
+				<v-checkbox v-model="todo.checked"></v-checkbox>
+			    <span v-bind:class="{ crossed: todo.checked }" class="subheading">{{ todo.todoText }}</span>
+			    <v-btn v-on:click="deleteTask(index)" small color="#B2DFDB">Delete</v-btn>
 			</li>
 		</ul>
 	</div>
 
-	<!-- development version, includes helpful console warnings -->
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
 	<script src="./main.js"></script>
 </body>
 </html>
